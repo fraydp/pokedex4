@@ -22,6 +22,10 @@ class Pokemon {
     private var _nextEvolutionTxt: String!
     private var _pokemonURL: String!
     
+    private var _nextEvolutionName: String!
+    private var _nextEvolutionId: String!
+    private var _nextEvolutionLevel: String!
+    
     var description: String{
         if _description == nil{
             _description = ""
