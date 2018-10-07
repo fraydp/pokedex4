@@ -19,13 +19,19 @@ class Pokemon {
     private var _height: String!
     private var _weight: String!
     private var _attack: String!
-    private var _nextEvolutionTxt: String!
     private var _pokemonURL: String!
-    
+    private var _nameEvolution: String!
+    private var _urlPokeNombre: String!
     private var _nextEvolutionName: String!
     private var _nextEvolutionId: String!
-    private var _nextEvolutionLevel: String!
     
+    
+    var nameEvolution: String{
+        if _nameEvolution == nil{
+            _nameEvolution = ""
+        }
+        return _nameEvolution
+    }
     var description: String{
         if _description == nil{
             _description = ""
@@ -59,15 +65,17 @@ class Pokemon {
     
     var attack : String {
         if _attack == nil{
-            _attack=""
+            _attack = ""
         }
         return _attack
+        
     }
-    var nextEvolutionText: String {
-        if _nextEvolutionTxt == nil{
-            _nextEvolutionTxt = ""
+    
+    var nextEvolutionId: String {
+        if _nextEvolutionId == nil{
+            _nextEvolutionId = ""
         }
-        return _nextEvolutionTxt
+        return _nextEvolutionId
     }
     var name : String{
         return _name
@@ -96,17 +104,73 @@ class Pokemon {
                 if let height = dict["height"] as? Int{
                     self._height = "\(height)"
                 }
-                if let attack = dict["attack"] as? Int{
-                    self._attack = "\(attack)"
-                }
-                if let defense = dict["defense"] as? Int{
-                    self._defense = "\(defense)"
+                
+                //searching evolution------------------------
+                
+                if let species = dict["species"] as? Dictionary<String, String>, species.count > 0{
+                    if let url1 = species["url"] {
+                        Alamofire.request(url1).responseJSON { (response) in
+                            if let dictSpecies = response.result.value as? Dictionary<String, Any>{
+                                if let evol = dictSpecies["evolution_chain"] as? Dictionary<String, String>{
+                                    if let url2 = evol["url"]{
+                                        Alamofire.request(url2).responseJSON { (response) in
+                                            if let dictEvol = response.result.value as? Dictionary<String, Any>{
+                                                if let chain = dictEvol["chain"] as? Dictionary<String, Any>, chain.count > 0
+                                                {
+                                                    if let evolTo1 = chain["evolves_to"] as? [Dictionary<String, Any>], evolTo1.count > 0{
+                                                        if let evolTo2 = evolTo1[0]["evolves_to"] as? [Dictionary<String, Any>], evolTo2.count > 0{
+                                                            if let spe = evolTo2[0]["species"] as? Dictionary<String, String>, spe.count > 0 {
+                                                                if let nameEvol = spe["name"]{
+                                                                    self._nameEvolution = nameEvol
+                                                                }
+                                                            }
+                                                        
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            completed()
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            completed()
+                            
+                        }
+                            
+                        
+                    }
+                    
                 }
                 
-                print(self._weight)
-                print(self._height)
-                print(self._attack)
-                print(self._defense)
+                
+                //------------------------------------------
+               if let stats = dict["stats"] as? [Dictionary<String,Any>]{
+                    if let defensa = stats[3]["stat"] as? Dictionary<String, String>{
+                        if  defensa["name"] == "defense"{
+                            if let def = stats[3]["base_stat"] as? Int{
+                                self._defense = "\(def)"
+                            }
+                        }
+                    }
+                }
+                
+
+                
+                if let stats = dict["stats"] as? [Dictionary<String,Any>]{
+                    if let ataque = stats[4]["stat"] as? Dictionary<String, String>{
+                        if  ataque["name"] == "attack"{
+                            if let atac = stats[4]["base_stat"] as? Int{
+                                self._attack = "\(atac)"
+                            }
+                        }
+                    }
+                }
+                
                 
                 if let types = dict["types"] as? [Dictionary<String, Any>] , types.count > 0{
                     if let arrayTipo = types[0]["type"] as? Dictionary<String, String>{
@@ -124,12 +188,28 @@ class Pokemon {
                         }
                     }
                     
-                    print("#########\(self._type)")
+                   
                 }else {
                     self._type = ""
-                    print("#########nada\(self._type)")
+                
                 }
             }
+            
+            
+            
+            completed()
+        }
+    }
+    func downloadPokemonDetails2(completed: @escaping DownloadComplete){
+        
+    _urlPokeNombre = "\(URL_BASE)\(URL_POKEMON)\(self._nameEvolution!)"
+        Alamofire.request(_urlPokeNombre).responseJSON { (response) in
+            if let idEv = response.result.value as? Dictionary<String, Any>{
+                if let id = idEv["id"] as? Int{
+                    self._nextEvolutionId = "\(id)"
+                }
+            }
+            print("jeje \(self._nextEvolutionId)")
             completed()
         }
     }

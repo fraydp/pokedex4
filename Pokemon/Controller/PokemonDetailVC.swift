@@ -26,6 +26,8 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var nextEvoImage: UIImageView!
     @IBOutlet weak var evoLbl: UILabel!
     
+    var pokemoEvol: Pokemon!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,10 @@ class PokemonDetailVC: UIViewController {
             //Whatever we write will only be called after the network call is complete!
             
             self.updateUI()
+            
         }
+        
+      
     }
     
     func updateUI() {
@@ -53,6 +58,14 @@ class PokemonDetailVC: UIViewController {
         heightLbl.text = pokemon.height
         weightLbl.text = pokemon.weight
         typeLbl.text = pokemon.type
+        evoLbl.text = "Next evolution: \(pokemon.nameEvolution)"
+        self.pokemon.downloadPokemonDetails2 {
+            if self.pokemon.nextEvolutionId != ""{
+                let imgEvo = UIImage(named: "\(self.pokemon.nextEvolutionId)")
+                self.nextEvoImage.image = imgEvo
+            }
+        }
+       
     }
 
   
