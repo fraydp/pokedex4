@@ -27,6 +27,7 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var evoLbl: UILabel!
     
     var pokemoEvol: Pokemon!
+   
     
     
     override func viewDidLoad() {
@@ -58,7 +59,8 @@ class PokemonDetailVC: UIViewController {
         heightLbl.text = pokemon.height
         weightLbl.text = pokemon.weight
         typeLbl.text = pokemon.type
-        evoLbl.text = "Next evolution: \(pokemon.nameEvolution)"
+        
+        evoLbl.text = "\(pokemon.nameEvolution)"
         self.pokemon.downloadPokemonDetails2 {
             if self.pokemon.nextEvolutionId != ""{
                 let imgEvo = UIImage(named: "\(self.pokemon.nextEvolutionId)")

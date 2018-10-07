@@ -209,7 +209,7 @@ class Pokemon {
                     self._nextEvolutionId = "\(id)"
                 }
             }
-            print("jeje \(self._nextEvolutionId)")
+            
             completed()
         }
     }
