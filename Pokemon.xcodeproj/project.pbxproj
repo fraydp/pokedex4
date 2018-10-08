@@ -23,6 +23,7 @@
 		ABD527572168149F00414100 /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = ABD527562168149E00414100 /* music.png */; };
 		ABD9900021696F2F006A468C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD98FFF21696F2F006A468C /* Constants.swift */; };
 		ABE1206D2167AED700885F1B /* PokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1206C2167AED700885F1B /* PokeCell.swift */; };
+		ABE65561216AD45800EB1EDB /* musicaCuadrada.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE65560216AD45800EB1EDB /* musicaCuadrada.png */; };
 		ABEC014521684B52009F1BA1 /* PokemonDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEC014421684B52009F1BA1 /* PokemonDetailVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		ABD527562168149E00414100 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
 		ABD98FFF21696F2F006A468C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ABE1206C2167AED700885F1B /* PokeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCell.swift; sourceTree = "<group>"; };
+		ABE65560216AD45800EB1EDB /* musicaCuadrada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicaCuadrada.png; sourceTree = "<group>"; };
 		ABEC014421684B52009F1BA1 /* PokemonDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 		ABD5275221680CD900414100 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ABE65560216AD45800EB1EDB /* musicaCuadrada.png */,
 				AB1F17D82166D3E40029BACD /* pokemon.csv */,
 				ABD527542168149800414100 /* music.mp3 */,
 				ABD527562168149E00414100 /* music.png */,
@@ -326,6 +329,7 @@
 				ABD527572168149F00414100 /* music.png in Resources */,
 				AB1F17B52166C9EA0029BACD /* LaunchScreen.storyboard in Resources */,
 				ABD527552168149800414100 /* music.mp3 in Resources */,
+				ABE65561216AD45800EB1EDB /* musicaCuadrada.png in Resources */,
 				AB1F17B22166C9EA0029BACD /* Assets.xcassets in Resources */,
 				AB1F17D92166D3E40029BACD /* pokemon.csv in Resources */,
 				AB1F17B02166C9E90029BACD /* Main.storyboard in Resources */,
